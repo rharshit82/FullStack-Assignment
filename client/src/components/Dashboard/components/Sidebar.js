@@ -4,11 +4,15 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faPlus } from "@fortawesome/free-solid-svg-icons";
 const Container = styled.div`
   background: ${(props) => props.theme.purpleLight};
-  position: fixed;
-  width: 25vw;
-  height: 100%;
+  position: absolute;
+  width: 20vw;
+  height: 88vh;
 `;
 const AddNoteContainer = styled.div`
+  cursor: pointer;
+
+  padding-top: 2rem;
+  padding-bottom: 2rem;
   padding-left: 3rem;
   display: flex;
   align-items: center;
@@ -23,6 +27,10 @@ const AddPostText = styled.h3`
   margin-left: 2rem;
   color: ${(props) => props.theme.white};
 `;
+const LineBreak = styled.div`
+  border: 1px solid ${(props) => props.theme.white};
+  opacity: 0.2;
+`;
 const Sidebar = () => {
   return (
     <Container>
@@ -30,6 +38,7 @@ const Sidebar = () => {
         <FontAwesomeIcon icon={faPlus} />
         <AddPostText>Add Post</AddPostText>
       </AddNoteContainer>
+      <LineBreak />
     </Container>
   );
 };
