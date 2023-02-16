@@ -1,4 +1,4 @@
-import React from "react";
+import React, {useState} from "react";
 import styled from "styled-components/macro";
 import Sidebar from "./components/Sidebar";
 import Header from "./components/Header";
@@ -17,18 +17,17 @@ const ContentWrapper = styled.div`
   margin-left: 20vw;
 `;
 const Dashboard = () => {
-  const [isRightSidebarOpen, setIsRightSidebarOpen] = React.useState(false);
-
+    const [contentSize, setContentSize] = useState(1);
   return (
     <>
       <Container>
-        <Header setIsRightSidebarOpen={setIsRightSidebarOpen} />
+        <Header />
         <Content>
           <Sidebar />
           <ContentWrapper>
-            <Editor />
+            <Editor contentSize={contentSize}  setContentSize={setContentSize}/>
+            <RightSidebar contentSize={contentSize}  setContentSize={setContentSize}/>
           </ContentWrapper>
-          {isRightSidebarOpen && <RightSidebar />}
         </Content>
       </Container>
     </>

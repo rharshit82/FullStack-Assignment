@@ -43,7 +43,7 @@ const ProfileWrapper = styled.div`
   }
 `;
 
-const Header = ({setIsRightSidebarOpen}) => {
+const Header = () => {
   const { user } = useAuth0();
   console.log(user);
   return (
@@ -52,7 +52,7 @@ const Header = ({setIsRightSidebarOpen}) => {
       <H1>Sticky Notes!</H1>
       <ProfileWrapper>
         <ProfileImage src={user.picture} alt={user.name} />
-        <FontAwesomeIcon icon={faBars} onClick={() => setIsRightSidebarOpen((open) => !open)} />
+        <FontAwesomeIcon icon={faBars}  />
       </ProfileWrapper>
     </Container>
   );

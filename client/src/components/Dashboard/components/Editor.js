@@ -68,12 +68,20 @@ const ContentWrapper = styled.div`
   ${(props) => props.fruit === "Apple" && `left: 24%; top: 8rem;`}
   ${(props) => props.fruit === "Mango" && `left: 24%; top: 8rem;`}
   ${(props) => props.fruit === "Strawberry" && `left: 24%; top: 8rem;`}
+  ${(props) =>
+    (props.contentSize === 2 || props.contentSize === 3) &&
+    `left: 1%; top: 0rem;`}
+   ${(props) => props.contentSize === 1 && `left: 1%; top: 0rem;`}
 `;
 const FruitContainer = styled.div`
   display: flex;
   position: fixed;
   bottom: 2rem;
   left: 25vw;
+  ${(props) =>
+    props.contentSize === 3 &&
+    ` bottom: 2rem;
+  left: 65vw;`}
 `;
 const Fruit = styled.div`
   display: flex;
@@ -93,19 +101,19 @@ const FruitImage = styled.img`
   height: 1.5rem;
   width: 1.5rem;
 `;
-const Editor = () => {
+const Editor = ({ contentSize, setContentSize }) => {
   const [content, setContent] = useState("");
   const [fruit, setFruit] = useState("Apple");
   return (
     <Container fruit={fruit}>
       <FontAwesomeIcon icon={faXmark} />
-      <ContentWrapper fruit={fruit}>
+      <ContentWrapper fruit={fruit} contentSize={contentSize}>
         <Title>Title</Title>
         <TitleInput />
         <Content>Content</Content>
         <ReactQuill theme='snow' value={content} onChange={setContent} />
       </ContentWrapper>
-      <FruitContainer>
+      <FruitContainer contentSize={contentSize}>
         <Fruit onClick={() => setFruit("Pears")}>
           <FruitImage src='/assets/fruits/peers-icon.svg' />
           <FruitName>Pears</FruitName>

@@ -1,7 +1,7 @@
 import React from "react";
 import styled from "styled-components/macro";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faUpLong, faDown } from "@fortawesome/free-solid-svg-icons";
+import { faUpLong, faXmarkCircle } from "@fortawesome/free-solid-svg-icons";
 const Container = styled.div`
   transition: all 1s ease-in-out;
 
@@ -17,20 +17,66 @@ const Container = styled.div`
   flex-direction: column;
   align-items: center;
   padding-top: 2rem;
-  row-gap: 2rem;
   & svg {
     height: 2rem;
     width: 2rem;
-    &:nth-child(2) {
-      transform: rotate(180deg);
-    }
+  }
+  & div:nth-child(2) svg {
+    transform: rotate(180deg);
   }
 `;
-const RightSidebar = () => {
+const Label = styled.p`
+  font-size: 1rem;
+  text-align: center;
+`;
+const Row = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding-top: 1rem;
+  padding-bottom: 1rem;
+  cursor: pointer;
+  &:hover {
+    border-top: 1px solid ${(props) => props.theme.white};
+    border-bottom: 1px solid ${(props) => props.theme.white};
+  }
+`;
+const RightSidebar = ({ contentSize, setContentSize }) => {
+  const increaseContent = () => {
+    const element = document.getElementsByClassName("ql-editor")[0];
+    if(contentSize == 1){
+        element.style.setProperty("min-height", "20rem", "important");
+        element.style.setProperty("min-width", "43rem", "important");
+        setContentSize(2)
+    } else if(contentSize == 2){
+        element.style.setProperty("min-height", "30rem", "important");
+        setContentSize(3)
+    }
+  };
+  const decreaseContent = () => {
+    const element = document.getElementsByClassName("ql-editor")[0];
+    if(contentSize == 3){
+        element.style.setProperty("min-height", "20rem", "important");
+        setContentSize(2)
+    } else if(contentSize == 2){
+        element.style.setProperty("min-height", "10rem", "important");
+        setContentSize(1)
+    }
+  };
   return (
     <Container>
-      <FontAwesomeIcon icon={faUpLong} />
-      <FontAwesomeIcon icon={faUpLong} />
+      <Row>
+        <FontAwesomeIcon icon={faUpLong} />
+        <Label onClick={() => increaseContent()}>More Content</Label>
+      </Row>
+      <Row>
+        <FontAwesomeIcon icon={faUpLong} />
+        <Label onClick={() => decreaseContent()}>Less Content</Label>
+      </Row>
+      <Row>
+        <FontAwesomeIcon icon={faXmarkCircle} />
+        <Label>Remove Fruit</Label>
+      </Row>
     </Container>
   );
 };
