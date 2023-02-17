@@ -40,42 +40,45 @@ const Row = styled.div`
     border-top: 1px solid ${(props) => props.theme.white};
     border-bottom: 1px solid ${(props) => props.theme.white};
   }
+  &:nth-of-type(2) {
+    ${(props) => props.contentSize === 1 && `opacity: 0.5`}
+  }
+  &:nth-of-type(1) {
+    ${(props) => props.contentSize === 3 && `opacity: 0.5`}
+  }
 `;
 const RightSidebar = ({ contentSize, setContentSize }) => {
   const increaseContent = () => {
     const element = document.getElementsByClassName("ql-editor")[0];
-    if(contentSize == 1){
-        element.style.setProperty("min-height", "20rem", "important");
-        element.style.setProperty("min-width", "43rem", "important");
-        setContentSize(2)
-    } else if(contentSize == 2){
-        element.style.setProperty("min-height", "30rem", "important");
-        setContentSize(3)
+    if (contentSize === 1) {
+      element.style.setProperty("min-height", "20rem", "important");
+      element.style.setProperty("min-width", "43rem", "important");
+      setContentSize(2);
+    } else if (contentSize === 2) {
+      element.style.setProperty("min-height", "30rem", "important");
+      setContentSize(3);
     }
   };
   const decreaseContent = () => {
     const element = document.getElementsByClassName("ql-editor")[0];
-    if(contentSize == 3){
-        element.style.setProperty("min-height", "20rem", "important");
-        setContentSize(2)
-    } else if(contentSize == 2){
-        element.style.setProperty("min-height", "10rem", "important");
-        setContentSize(1)
+    if (contentSize === 3) {
+      element.style.setProperty("min-height", "20rem", "important");
+      setContentSize(2);
+    } else if (contentSize === 2) {
+      element.style.setProperty("min-height", "10rem", "important");
+      element.style.setProperty("min-width", "10rem", "important");
+      setContentSize(1);
     }
   };
   return (
     <Container>
-      <Row>
+      <Row onClick={() => increaseContent()} contentSize={contentSize}>
         <FontAwesomeIcon icon={faUpLong} />
-        <Label onClick={() => increaseContent()}>More Content</Label>
+        <Label>More Content</Label>
       </Row>
-      <Row>
+      <Row onClick={() => decreaseContent()} contentSize={contentSize}>
         <FontAwesomeIcon icon={faUpLong} />
-        <Label onClick={() => decreaseContent()}>Less Content</Label>
-      </Row>
-      <Row>
-        <FontAwesomeIcon icon={faXmarkCircle} />
-        <Label>Remove Fruit</Label>
+        <Label>Less Content</Label>
       </Row>
     </Container>
   );

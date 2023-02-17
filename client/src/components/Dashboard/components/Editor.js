@@ -5,6 +5,7 @@ import styled from "styled-components/macro";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faXmark, faAppleWhole } from "@fortawesome/free-solid-svg-icons";
 const Container = styled.div`
+  margin-left: 1rem;
   & > svg {
     cursor: pointer;
     position: absolute;
@@ -64,6 +65,8 @@ const Content = styled.h3`
 `;
 const ContentWrapper = styled.div`
   position: absolute;
+  transition: all 0.3s ease-in-out;
+  ${(props) => props.contentSize === 1 && `left: 1%; top: 0rem;`}
   ${(props) => props.fruit === "Pears" && `left: 10%; top: 8rem;`}
   ${(props) => props.fruit === "Apple" && `left: 24%; top: 8rem;`}
   ${(props) => props.fruit === "Mango" && `left: 24%; top: 8rem;`}
@@ -71,7 +74,6 @@ const ContentWrapper = styled.div`
   ${(props) =>
     (props.contentSize === 2 || props.contentSize === 3) &&
     `left: 1%; top: 0rem;`}
-   ${(props) => props.contentSize === 1 && `left: 1%; top: 0rem;`}
 `;
 const FruitContainer = styled.div`
   display: flex;
@@ -80,8 +82,12 @@ const FruitContainer = styled.div`
   left: 25vw;
   ${(props) =>
     props.contentSize === 3 &&
-    ` bottom: 2rem;
+    ` bottom: 20vhrem;
+    flex-direction: column;
+    align-items: flex-start;
   left: 65vw;`}
+  transition: all 0.3s ease-in-out;
+
 `;
 const Fruit = styled.div`
   display: flex;

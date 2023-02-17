@@ -1,9 +1,10 @@
-import React, {useState} from "react";
+import React, { useState } from "react";
 import styled from "styled-components/macro";
 import Sidebar from "./components/Sidebar";
 import Header from "./components/Header";
 import RightSidebar from "./components/RightSidebar";
 import Editor from "./components/Editor";
+import Home from "./components/Home";
 const Container = styled.div`
   display: flex;
   flex-direction: column;
@@ -15,18 +16,36 @@ const Content = styled.div`
 `;
 const ContentWrapper = styled.div`
   margin-left: 20vw;
+  transition: all 0.3s ease-in-out;
+
 `;
 const Dashboard = () => {
-    const [contentSize, setContentSize] = useState(1);
+  const [contentSize, setContentSize] = useState(1);
+  const [mainContent, setMainContent] = useState("Home");
   return (
     <>
       <Container>
         <Header />
         <Content>
-          <Sidebar />
+          <Sidebar setMainContent={setMainContent} />
           <ContentWrapper>
-            <Editor contentSize={contentSize}  setContentSize={setContentSize}/>
-            <RightSidebar contentSize={contentSize}  setContentSize={setContentSize}/>
+            {mainContent === "AddNote" ? (
+              <>
+                <Editor
+                  contentSize={contentSize}
+                  setContentSize={setContentSize}
+                />
+                <RightSidebar
+                  contentSize={contentSize}
+                  setContentSize={setContentSize}
+                />
+              </>
+            ) : null}
+            {mainContent === "Home" ? (
+              <>
+               <Home />
+              </>
+            ) : null}
           </ContentWrapper>
         </Content>
       </Container>

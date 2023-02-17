@@ -1,4 +1,4 @@
-import Note from '../models/noteModel.js'
+const Note  = require('../models/noteModel.js') 
 export const addNotes = (req, res) => {
   const { title, content } = req.body
   Note.create(
