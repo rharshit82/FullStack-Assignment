@@ -1,12 +1,10 @@
-const express = require("express") ;
-const notesRoutes = require("./routes/notesRoutes.js") ;
-const dotenv = require("dotenv") ;
-const dbConnect = require("./middlewares/db.js") ;
-const Note = require("./models/noteModel.js") ;
-
+const express = require("express");
+const notesRoutes = require("./routes/notesRoutes.js");
+const dotenv = require("dotenv");
+const dbConnect = require("./middlewares/db.js");
+const Note = require("./models/noteModel.js");
 
 const path = require("path");
-
 
 //Initialising dotenv
 dotenv.config();
@@ -40,20 +38,11 @@ io.on("connection", (socket) => {
   });
   socket.on("enteringNote", async ({ note, noteDbId }) => {
     console.log(note);
-    await Note.findOneAndUpdate(
+    const res = await Note.findOneAndUpdate(
       { _id: noteDbId },
       {
-        $set: {
-            note,
-        },
+        $set: note,
       }
     );
-    socket.to(noteDbId).emit("recievingNote", { recCode: note });
-  });
-  socket.on("enteringInp", ({ inp, roomDbId }) => {
-    console.log(inp);
-    socket.to(roomDbId).emit("receivingInp", { inp });
   });
 });
-
-

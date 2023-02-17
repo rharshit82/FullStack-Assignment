@@ -29,8 +29,16 @@ exports.fetchNote = async (req, res) => {
 
 exports.fetchNotes = async (req, res) => {
   try {
-    const notes = await Note.find({}).sort({ createdAt: -1 })
+    const notes = await Note.find({ email: req.body.email}).sort({ createdAt: -1 })
     return res.status(201).send(notes)
+  } catch (err) {
+    return res.status(404).json({ message: 'No Notes Found' })
+  }
+}
+exports.deleteNote = async (req, res) => {
+  try {
+    const notes = await Note.deleteOne({ _id: req.body.id })
+    return res.status(200).send(notes)
   } catch (err) {
     return res.status(404).json({ message: 'No Notes Found' })
   }

@@ -19,6 +19,7 @@
     "react-loader-spinner": "^5.3.4",
     "react-quill": "^2.0.0",
     "react-scripts": "5.0.1",
+    "react-to-pdf": "0.0.14",
     "socket.io-client": "^4.6.0",
     "styled-components": "^5.3.6",
     "web-vitals": "^2.1.4"

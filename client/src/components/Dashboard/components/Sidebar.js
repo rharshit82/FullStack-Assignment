@@ -1,7 +1,11 @@
 import React from "react";
 import styled from "styled-components/macro";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faPlus, faHome } from "@fortawesome/free-solid-svg-icons";
+import {
+  faPlus,
+  faHome,
+  faNoteSticky,
+} from "@fortawesome/free-solid-svg-icons";
 const Container = styled.div`
   background: ${(props) => props.theme.purpleLight};
   position: absolute;
@@ -46,7 +50,26 @@ const Sidebar = ({ setMainContent, addNote }) => {
         }}
       >
         <FontAwesomeIcon icon={faPlus} />
-        <MenuItem>Add Post</MenuItem>
+        <MenuItem>Add Note</MenuItem>
+      </MenuItemContainer>
+
+      <LineBreak />
+      <MenuItemContainer
+        onClick={() => {
+          setMainContent("YourNotes");
+        }}
+      >
+        <FontAwesomeIcon icon={faNoteSticky} />
+        <MenuItem>Your Notes</MenuItem>
+      </MenuItemContainer>
+      <LineBreak />
+      <MenuItemContainer
+        onClick={() => {
+          setMainContent("Download");
+        }}
+      >
+        <FontAwesomeIcon icon={faNoteSticky} />
+        <MenuItem>Download PDF</MenuItem>
       </MenuItemContainer>
 
       <LineBreak />

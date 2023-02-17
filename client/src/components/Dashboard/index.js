@@ -5,10 +5,12 @@ import Header from "./components/Header";
 import RightSidebar from "./components/RightSidebar";
 import Editor from "./components/Editor";
 import Home from "./components/Home";
+import YourNotes from "./components/YourNotes";
 import axios from "axios";
 import { useAuth0 } from "@auth0/auth0-react";
 import { useAlert } from "react-alert";
 import socket from "../../socket";
+import Download from "./components/Download";
 
 const Container = styled.div`
   display: flex;
@@ -34,16 +36,17 @@ const Dashboard = () => {
   const [fruit, setFruit] = useState("Pears");
 
   useEffect(() => {
-    console.log(socket)
+    console.log(socket);
     socket.emit("joined", { noteDbId: currentNoteID });
   }, [socket, currentNoteID]);
-  
 
   useEffect(() => {
-    socket.emit("enteringNote", {noteDbId: currentNoteID, note: {title, content, fruit}})
-    console.log(title, content, fruit)
-  }, [title, content, fruit])
-
+    socket.emit("enteringNote", {
+      noteDbId: currentNoteID,
+      note: { title, content, fruit },
+    });
+    console.log(title, content, fruit);
+  }, [title, content, fruit]);
 
   const addNote = async () => {
     if (!user) {
@@ -64,7 +67,7 @@ const Dashboard = () => {
         setCurrentNoteID(res.data);
         setTitle("");
         setContent("");
-        setFruit("Pears")
+        setFruit("Pears");
         console.log(res.data);
       } else {
         alert.error("Some Error Occured");
@@ -73,37 +76,44 @@ const Dashboard = () => {
       alert.error("Some Error Occured");
     }
   };
+  const renderContent = () => {
+    switch (mainContent) {
+      case "AddNote":
+        return (
+          <>
+            <Editor
+              contentSize={contentSize}
+              setContentSize={setContentSize}
+              setFruit={setFruit}
+              fruit={fruit}
+              title={title}
+              setTitle={setTitle}
+              content={content}
+              setContent={setContent}
+            />
+            <RightSidebar
+              contentSize={contentSize}
+              setContentSize={setContentSize}
+            />
+          </>
+        );
+
+      case "YourNotes":
+        return <YourNotes />;
+      case "Download":
+        return <Download />;
+
+      default:
+        return <Home />;
+    }
+  };
   return (
     <>
       <Container>
         <Header />
         <Content>
           <Sidebar setMainContent={setMainContent} addNote={addNote} />
-          <ContentWrapper>
-            {mainContent === "AddNote" ? (
-              <>
-                <Editor
-                  contentSize={contentSize}
-                  setContentSize={setContentSize}
-                  setFruit={setFruit}
-                  fruit={fruit}
-                  title={title}
-                  setTitle={setTitle}
-                  content={content}
-                  setContent={setContent}
-                />
-                <RightSidebar
-                  contentSize={contentSize}
-                  setContentSize={setContentSize}
-                />
-              </>
-            ) : null}
-            {mainContent === "Home" ? (
-              <>
-                <Home />
-              </>
-            ) : null}
-          </ContentWrapper>
+          <ContentWrapper>{renderContent()}</ContentWrapper>
         </Content>
       </Container>
     </>

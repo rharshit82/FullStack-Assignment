@@ -27,6 +27,10 @@ const NotesImage = styled.img``;
 const Title = styled.h2`
   text-align: center;
   margin-bottom: 1rem;
+  & span{
+    color: ${props => props.theme.golden};
+
+  }
 `;
 const Description = styled.p``;
 const DiscordIcon = styled.img``;
@@ -57,7 +61,7 @@ const Home = () => {
     <Container>
       <HomeContent>
         <Title>
-          Fruitify your Thoughts with Sticky Notes for Every Flavor!
+          Fruitify your Thoughts with Sticky Notes for <span>Every Flavor!</span>
         </Title>
         <NoteRow>
           <NoteImage src='/assets/notebook.svg' />
