@@ -1,7 +1,11 @@
 const express = require("express");
+const {addNote, fetchNote, fetchNotes} = require('../controllers/notesController');
 
 const router = express.Router();
 
-router.post("/", (req, res) => res.send("API is Working"));
+router.post("/getNote", fetchNote);
+router.get("/getNotes", fetchNotes);
 
-module.export = router;
+router.post("/createNote", addNote);
+
+module.exports = router;

@@ -45,7 +45,6 @@ const ProfileWrapper = styled.div`
 
 const Header = () => {
   const { user } = useAuth0();
-  console.log(user);
   return (
     <Container>
       <Logo src={"/assets/svg/logo-no-background.svg"} alt='logo' />

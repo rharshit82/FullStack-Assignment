@@ -19,8 +19,8 @@ const app = express();
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 
-//Basic Routes
-// app.use("/notes", notesRoutes);
+// Basic Routes
+app.use("/notes", notesRoutes);
 
 // if (process.env.NODE_ENV === "production") {
 //   app.use(express.static("client/build"));
@@ -35,6 +35,7 @@ const io = require("socket.io")(server);
 io.on("connection", (socket) => {
   console.log("Connected to socket!");
   socket.on("joined", async ({ noteDbId }) => {
+    console.log(noteDbId);
     socket.join(noteDbId);
   });
   socket.on("enteringNote", async ({ note, noteDbId }) => {

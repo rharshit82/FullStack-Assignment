@@ -31,15 +31,20 @@ const LineBreak = styled.div`
   border: 1px solid ${(props) => props.theme.white};
   opacity: 0.2;
 `;
-const Sidebar = ({setMainContent}) => {
+const Sidebar = ({ setMainContent, addNote }) => {
   return (
     <Container>
-      <MenuItemContainer onClick ={ () => setMainContent("Home")}>
+      <MenuItemContainer onClick={() => setMainContent("Home")}>
         <FontAwesomeIcon icon={faHome} />
         <MenuItem>Home</MenuItem>
       </MenuItemContainer>
       <LineBreak />
-      <MenuItemContainer onClick ={ () => setMainContent("AddNote")} >
+      <MenuItemContainer
+        onClick={() => {
+          setMainContent("AddNote");
+          addNote();
+        }}
+      >
         <FontAwesomeIcon icon={faPlus} />
         <MenuItem>Add Post</MenuItem>
       </MenuItemContainer>

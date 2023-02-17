@@ -107,15 +107,13 @@ const FruitImage = styled.img`
   height: 1.5rem;
   width: 1.5rem;
 `;
-const Editor = ({ contentSize, setContentSize }) => {
-  const [content, setContent] = useState("");
-  const [fruit, setFruit] = useState("Apple");
+const Editor = ({ contentSize, setContentSize, fruit, setFruit,title, setTitle, content, setContent }) => {
   return (
     <Container fruit={fruit}>
       <FontAwesomeIcon icon={faXmark} />
       <ContentWrapper fruit={fruit} contentSize={contentSize}>
         <Title>Title</Title>
-        <TitleInput />
+        <TitleInput value={title} onChange={(e) => setTitle(e.target.value)} />
         <Content>Content</Content>
         <ReactQuill theme='snow' value={content} onChange={setContent} />
       </ContentWrapper>
