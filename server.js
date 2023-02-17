@@ -20,12 +20,12 @@ app.use(express.json());
 // Basic Routes
 app.use("/notes", notesRoutes);
 
-// if (process.env.NODE_ENV === "production") {
-//   app.use(express.static("client/build"));
-//   app.get("*", (req, res) => {
-//     res.sendFile(path.resolve(__dirname, "client/build", "index.html"));
-//   });
-// }
+if (process.env.NODE_ENV === "production") {
+  app.use(express.static("client/build"));
+  app.get("*", (req, res) => {
+    res.sendFile(path.resolve(__dirname, "client/build", "index.html"));
+  });
+}
 const PORT = process.env.PORT;
 const server = app.listen(PORT || 5000, () => console.log("Server Running"));
 const io = require("socket.io")(server);

@@ -25,7 +25,7 @@ const ContentWrapper = styled.div`
   margin-left: 20vw;
   transition: all 0.3s ease-in-out;
 `;
-const Dashboard = () => {
+const Dashboard = ({ changeTheme, currentTheme }) => {
   const { user } = useAuth0();
   const alert = useAlert();
   const [contentSize, setContentSize] = useState(1);
@@ -110,7 +110,7 @@ const Dashboard = () => {
   return (
     <>
       <Container>
-        <Header />
+        <Header changeTheme={changeTheme} currentTheme={currentTheme} />
         <Content>
           <Sidebar setMainContent={setMainContent} addNote={addNote} />
           <ContentWrapper>{renderContent()}</ContentWrapper>
